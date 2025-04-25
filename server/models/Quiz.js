@@ -18,6 +18,11 @@ const QuizSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  likes: {
+    type: Number,
+    min: 0,
+    required: true,
+  },
   owner: {
     type: mongoose.Schema.ObjectID,
     required: true,

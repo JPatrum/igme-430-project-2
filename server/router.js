@@ -21,7 +21,7 @@ const router = (app) => {
   app.get('/make', mid.requiresLogin, mid.requiresPremium, controllers.Question.makerPage);
   app.post('/make', mid.requiresLogin, mid.requiresPremium, controllers.Question.makeQuestion);
 
-  app.get('/play', mid.requiresLogin, controllers.Question.playerPage);
+  app.get('/play', mid.requiresLogin, controllers.Quiz.playerPage);
   app.post('/play', mid.requiresLogin, controllers.Quiz.likeQuiz);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
