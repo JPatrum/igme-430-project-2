@@ -4,6 +4,10 @@ const { Account } = models;
 
 const loginPage = (req, res) => res.render('login');
 
+const premiumPage = (req, res) => {
+  // TODO
+};
+
 const logout = (req, res) => {
   req.session.destroy();
   res.redirect('/');
@@ -26,6 +30,10 @@ const login = (req, res) => {
 
     return res.json({ redirect: '/void' });
   });
+};
+
+const togglePremium = async (req, res) => {
+  // TODO
 };
 
 const signup = async (req, res) => {
@@ -58,7 +66,9 @@ const signup = async (req, res) => {
 
 module.exports = {
   loginPage,
+  premiumPage,
   login,
   logout,
+  togglePremium,
   signup,
 };
