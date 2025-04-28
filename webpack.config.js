@@ -3,11 +3,10 @@ const path = require('path');
 module.exports = {
     entry: {
         login: './client/login.jsx',
-        browser: './client/browser.jsx',
-        maker: './client/maker.jsx',
-        myQuizzes: './client/myQuizzes.jsx',
+        list: './client/list.jsx',
         player: './client/player.jsx',
-        premium: './client/premium.jsx',
+        admin: './client/admin.jsx',
+        about: './client/about.jsx',
     },
     module: {
         rules: [

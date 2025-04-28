@@ -9,20 +9,18 @@ const router = (app) => {
 
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
-  app.get('/premium', mid.requiresLogin, controllers.Account.premiumPage);
-  app.post('/premium', mid.requiresLogin, controllers.Account.togglePremium);
+  app.get('/admin', mid.requiresLogin, controllers.Account.adminPage);
+  app.post('/admin', mid.requiresLogin, controllers.Account.toggleAdmin);
 
-  app.get('/browse', mid.requiresLogin, controllers.Quiz.browsePage);
-  app.post('/browse', mid.requiresLogin, controllers.Quiz.likeQuiz);
+  app.get('/main', mid.requiresLogin, controllers.Boss.mainList);
+  app.post('/main', mid.requiresLogin, mid.requiresAdmin, controllers.Boss.addBoss);
 
-  app.get('/myquizzes', mid.requiresLogin, controllers.Quiz.myQuizzes);
-  app.post('/myquizzes', mid.requiresLogin, controllers.Quiz.makeQuiz);
+  app.post('/legacy', mid.requiresLogin, mid.requiresAdmin, controllers.Boss.addBoss);
 
-  app.get('/make', mid.requiresLogin, mid.requiresPremium, controllers.Question.makerPage);
-  app.post('/make', mid.requiresLogin, mid.requiresPremium, controllers.Question.makeQuestion);
+  app.get('/player', mid.requiresLogin, controllers.Account.playerPage);
+  app.post('/player', mid.requiresLogin, controllers.Account.submitRecord);
 
-  app.get('/play', mid.requiresLogin, controllers.Quiz.playerPage);
-  app.post('/play', mid.requiresLogin, controllers.Quiz.likeQuiz);
+  app.get('/about', mid.requiresLogin, controllers.Boss.aboutPage);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };

@@ -17,13 +17,9 @@ const AccountSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  isPremium: {
+  isAdmin: {
     type: Boolean,
     required: true,
-  },
-  likedQuizzes: {
-    type: Array[String],
-    default: [''],
   },
   createdDate: {
     type: Date,

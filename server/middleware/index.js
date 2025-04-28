@@ -5,16 +5,16 @@ const requiresLogin = (req, res, next) => {
   return next();
 };
 
-const requiresPremium = (req, res, next) => {
-  if (!req.session.account.isPremium) {
-    return res.redirect('/premium');
+const requiresAdmin = (req, res, next) => {
+  if (!req.session.account.isAdmin) {
+    return res.redirect('/admin');
   }
   return next();
 };
 
 const requiresLogout = (req, res, next) => {
   if (req.session.account) {
-    return res.redirect('/browse');
+    return res.redirect('/mainList');
   }
 
   return next();
@@ -33,7 +33,7 @@ const bypassSecure = (req, res, next) => {
 
 module.exports.requiresLogin = requiresLogin;
 module.exports.requiresLogout = requiresLogout;
-module.exports.requiresPremium = requiresPremium;
+module.exports.requiresAdmin = requiresAdmin;
 if (process.env.NODE_ENV === 'production') {
   module.exports.requiresSecure = requiresSecure;
 } else {

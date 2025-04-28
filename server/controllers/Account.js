@@ -4,9 +4,17 @@ const { Account } = models;
 
 const loginPage = (req, res) => res.render('login');
 
-const premiumPage = (req, res) => {
+const adminPage = (req, res) => {
   // TODO
 };
+
+const playerPage = (req, res) => {
+  // TODO
+}
+
+const submitRecord = async (req, res) => {
+  // TODO
+}
 
 const logout = (req, res) => {
   req.session.destroy();
@@ -32,7 +40,7 @@ const login = (req, res) => {
   });
 };
 
-const togglePremium = async (req, res) => {
+const toggleAdmin = async (req, res) => {
   // TODO
 };
 
@@ -66,9 +74,11 @@ const signup = async (req, res) => {
 
 module.exports = {
   loginPage,
-  premiumPage,
+  adminPage,
+  playerPage,
+  submitRecord,
   login,
   logout,
-  togglePremium,
+  toggleAdmin,
   signup,
 };
