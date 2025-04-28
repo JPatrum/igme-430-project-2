@@ -15,6 +15,9 @@ const router = (app) => {
   app.get('/main', mid.requiresLogin, controllers.Boss.mainList);
   app.post('/main', mid.requiresLogin, mid.requiresAdmin, controllers.Boss.addBoss);
 
+  app.get('/getMain', mid.requiresLogin, controllers.Boss.getMain);
+  app.get('/getLegacy', mid.requiresLogin, controllers.Boss.getLegacy);
+
   app.post('/legacy', mid.requiresLogin, mid.requiresAdmin, controllers.Boss.addBoss);
 
   app.get('/player', mid.requiresLogin, controllers.Account.playerPage);

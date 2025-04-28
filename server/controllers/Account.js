@@ -10,11 +10,11 @@ const adminPage = (req, res) => {
 
 const playerPage = (req, res) => {
   // TODO
-}
+};
 
 const submitRecord = async (req, res) => {
   // TODO
-}
+};
 
 const logout = (req, res) => {
   req.session.destroy();

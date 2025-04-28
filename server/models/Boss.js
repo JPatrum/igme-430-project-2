@@ -37,6 +37,10 @@ const BossSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  isLegacy: {
+    type: Boolean,
+    required: true,
+  },
   createdDate: {
     type: Date,
     default: Date.now,
