@@ -3,6 +3,7 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
+// Swap prompt based on admin status
 const AdminPrompt = (props) => {
     const [admin, setAdmin] = useState(props.admin);
     useEffect(() => {
@@ -27,9 +28,10 @@ const AdminPrompt = (props) => {
 
 const AdminPage = (props) => {
     const [reload, setReload] = useState(false);
-    return(<AdminPage admin={false} reload={reload} />);
+    return(<AdminPrompt admin={false} reload={reload} />);
 }
 
+// Send request to toggle admin perms
 const toggleAdmin = (e) => {
     e.preventDefault();
     helper.sendPost('/admin', {});

@@ -1,6 +1,8 @@
 const React = require('react');
 const { createRoot } = require('react-dom/client');
 
+// About page that gives site info
+// Does not appear due to unknown issue
 const AboutInfo = (props) => {
     return(
         <div id='about'>

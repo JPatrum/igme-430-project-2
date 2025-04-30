@@ -6,6 +6,7 @@ const loginPage = (req, res) => res.render('login');
 
 const adminPage = (req, res) => res.render('admin');
 
+// UNUSED, was going to let the player view their own records
 // const playerPage = (req, res) => {
 //   // TODO
 // };
@@ -15,6 +16,7 @@ const logout = (req, res) => {
   res.redirect('/');
 };
 
+// Authenticate and log in
 const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -30,10 +32,11 @@ const login = (req, res) => {
 
     req.session.account = Account.toAPI(account);
 
-    return res.json({ redirect: '/void' });
+    return res.json({ redirect: '/main' });
   });
 };
 
+// Toggles admin perms on & off
 const toggleAdmin = async (req, res) => {
   const target = await Account.find({ _id: req.session.account._id });
   target.isAdmin = !target.isAdmin;
@@ -42,11 +45,13 @@ const toggleAdmin = async (req, res) => {
   return res.json({ redirect: '/admin' });
 };
 
+// Returns admin status of current user
 const getAdminState = (req, res) => {
   const state = req.session.account.isAdmin;
   return res.json({ isAdmin: state });
 };
 
+// Create account
 const signup = async (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;

@@ -3,6 +3,7 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
+// Send request to add entry - admin only
 const handleBoss = (e, onBossAdded) => {
     e.preventDefault();
     helper.hideError();
@@ -11,7 +12,7 @@ const handleBoss = (e, onBossAdded) => {
     const mod = e.target.querySelector('#bossMod').value;
     const difficulty = e.target.querySelector('#bossDiff').value;
     const maxHP = e.target.querySelector('#maxHP').value;
-    const globalPlacement = e.target.querySelector('bossPlace').value;
+    const globalPlacement = e.target.querySelector('#bossPlace').value;
     const video = e.target.querySelector('#videoID').value;
     const isLegacy = e.target.querySelector('#isLegacy').checked;
 
@@ -24,6 +25,7 @@ const handleBoss = (e, onBossAdded) => {
     return false;
 };
 
+// Entry creation form
 const BossForm = (props) => {
     return (
         <form id="bossForm"
@@ -52,8 +54,10 @@ const BossForm = (props) => {
     );
 };
 
+// Singular list entry
 const ListEntry = (props) => {
     const boss = props.boss;
+    // Concept for embeding a video, unfortunately did not get to test
     const videoURL = `https://www.youtube.com/embed/${boss.video}`;
     return(
         <div className='entry'>
@@ -68,6 +72,7 @@ const ListEntry = (props) => {
 }
 
 // https://www.geeksforgeeks.org/how-to-sort-an-array-of-objects-by-property-values/
+// Sorts entries based on global placement value
 const sortEntries = (a,b) => {
     if(a.globalPlacement < b.globalPlacement){
         return -1;
@@ -79,6 +84,7 @@ const sortEntries = (a,b) => {
     return 0;
 }
 
+// List of entries - can be main or legacy
 const BossList = (props) => {
     const [bosses, setBosses] = useState(props.bosses);
     useEffect(() => {
@@ -98,6 +104,7 @@ const BossList = (props) => {
         );
     }
 
+    // We use the index of the sorted list to get the "final" placement of an entry
     const sorted = bosses.sort(sortEntries);
     const entryNodes = sorted.map(entry => {
         return <ListEntry boss={entry} place={sorted.indexOf(entry) + 1} />
@@ -110,6 +117,7 @@ const BossList = (props) => {
     );
 };
 
+// Main list - legacy filtered out
 const MainListPage = (props) => {
     <div>
         <div id="addEntry">
@@ -121,6 +129,7 @@ const MainListPage = (props) => {
     </div>
 };
 
+// Legacy list - no filter
 const LegacyListPage = (props) => {
     <div>
         <div id="addEntry">
@@ -132,6 +141,7 @@ const LegacyListPage = (props) => {
     </div>
 };
 
+// Reactive page that changes between the two lists
 const init = () => {
     const mainBtn = document.getElementById('mainBtn');
     const legacyBtn = document.getElementById('legacyBtn');

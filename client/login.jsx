@@ -2,6 +2,7 @@ const helper = require('./helper.js');
 const React = require('react');
 const {createRoot} = require('react-dom/client');
 
+// Send login request
 const handleLogin = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -18,6 +19,7 @@ const handleLogin = (e) => {
     return false;
 }
 
+// Send signup request
 const handleSignup = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -40,6 +42,7 @@ const handleSignup = (e) => {
     return false;
 }
 
+// Login prompt
 const LoginWindow = (props) => {
     return (
         <form id="loginForm"
@@ -58,6 +61,7 @@ const LoginWindow = (props) => {
     );
 };
 
+// Signup prompt
 const SignupWindow = (props) => {
     return (
         <form id="signupForm"
@@ -78,6 +82,7 @@ const SignupWindow = (props) => {
     );
 };
 
+// Reactive window that changes between login and signup
 const init = () => {
     const loginButton = document.getElementById('loginButton');
     const signupButton = document.getElementById('signupButton');

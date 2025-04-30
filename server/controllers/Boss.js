@@ -6,6 +6,7 @@ const mainList = (req, res) => res.render('list');
 
 const aboutPage = (req, res) => res.render('about');
 
+// Recursively update list placements to make room for new entry
 const prepInsert = async (placement) => {
   const target = await Boss.find({ globalPlacement: placement }).lean.exec();
   if (target) {
@@ -15,6 +16,7 @@ const prepInsert = async (placement) => {
   }
 };
 
+// Add an entry to the list
 const addBoss = async (req, res) => {
   if (!req.body.name || !req.body.mod || !req.body.difficulty || !req.body.maxHP
     || !req.body.globalPlacement || !req.body.video || !req.body.isLegacy) {
@@ -45,6 +47,7 @@ const addBoss = async (req, res) => {
   }
 };
 
+// Get main list - legacy filtered out
 const getMain = async (req, res) => {
   try {
     const query = { isLegacy: false };
@@ -58,6 +61,7 @@ const getMain = async (req, res) => {
   }
 };
 
+// Get legacy list - no filter
 const getLegacy = async (req, res) => {
   try {
     const docs = await Boss.find({});

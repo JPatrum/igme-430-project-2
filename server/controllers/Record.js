@@ -2,6 +2,8 @@ const models = require('../models');
 
 const { Record, Boss } = models;
 
+// Submit a record on a given entry
+// Record submission is unfinished
 const submitRecord = async (req, res) => {
   if (!req.body.progress || !req.body.video) {
     return res.status(400).json({ error: 'Missing required param(s).' });
