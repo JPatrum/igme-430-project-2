@@ -4,17 +4,11 @@ const { Account } = models;
 
 const loginPage = (req, res) => res.render('login');
 
-const adminPage = (req, res) => {
-  // TODO
-};
+const adminPage = (req, res) => res.render('admin');
 
-const playerPage = (req, res) => {
-  // TODO
-};
-
-const submitRecord = async (req, res) => {
-  // TODO
-};
+// const playerPage = (req, res) => {
+//   // TODO
+// };
 
 const logout = (req, res) => {
   req.session.destroy();
@@ -41,7 +35,16 @@ const login = (req, res) => {
 };
 
 const toggleAdmin = async (req, res) => {
-  // TODO
+  const target = await Account.find({ _id: req.session.account._id });
+  target.isAdmin = !target.isAdmin;
+  await target.save();
+  req.session.account = Account.toAPI(target);
+  return res.json({ redirect: '/admin' });
+};
+
+const getAdminState = (req, res) => {
+  const state = req.session.account.isAdmin;
+  return res.json({ isAdmin: state });
 };
 
 const signup = async (req, res) => {
@@ -59,10 +62,10 @@ const signup = async (req, res) => {
 
   try {
     const hash = await Account.generateHash(pass);
-    const newAccount = new Account({ username, password: hash, isPremium: false });
+    const newAccount = new Account({ username, password: hash, isAdmin: false });
     await newAccount.save();
     req.session.account = Account.toAPI(newAccount);
-    return res.json({ redirect: '/void' });
+    return res.json({ redirect: '/main' });
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {
@@ -75,10 +78,10 @@ const signup = async (req, res) => {
 module.exports = {
   loginPage,
   adminPage,
-  playerPage,
-  submitRecord,
+  // playerPage,
   login,
   logout,
   toggleAdmin,
+  getAdminState,
   signup,
 };

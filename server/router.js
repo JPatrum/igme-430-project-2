@@ -12,6 +12,8 @@ const router = (app) => {
   app.get('/admin', mid.requiresLogin, controllers.Account.adminPage);
   app.post('/admin', mid.requiresLogin, controllers.Account.toggleAdmin);
 
+  app.get('/getAdmin', mid.requiresLogin, controllers.Account.getAdminState);
+
   app.get('/main', mid.requiresLogin, controllers.Boss.mainList);
   app.post('/main', mid.requiresLogin, mid.requiresAdmin, controllers.Boss.addBoss);
 
@@ -20,8 +22,9 @@ const router = (app) => {
 
   app.post('/legacy', mid.requiresLogin, mid.requiresAdmin, controllers.Boss.addBoss);
 
-  app.get('/player', mid.requiresLogin, controllers.Account.playerPage);
-  app.post('/player', mid.requiresLogin, controllers.Account.submitRecord);
+  // app.get('/player', mid.requiresLogin, controllers.Account.playerPage);
+
+  app.post('/record', mid.requiresLogin, controllers.Record.submitRecord);
 
   app.get('/about', mid.requiresLogin, controllers.Boss.aboutPage);
 

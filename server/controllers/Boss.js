@@ -4,8 +4,15 @@ const { Boss } = models;
 
 const mainList = (req, res) => res.render('list');
 
-const aboutPage = (req, res) => {
-  // TODO
+const aboutPage = (req, res) => res.render('about');
+
+const prepInsert = async (placement) => {
+  const target = await Boss.find({ globalPlacement: placement }).lean.exec();
+  if (target) {
+    await prepInsert(placement + 1);
+    target.globalPlacement += 1;
+    await target.save();
+  }
 };
 
 const addBoss = async (req, res) => {
@@ -26,6 +33,7 @@ const addBoss = async (req, res) => {
 
   try {
     const newBoss = new Boss(bossData);
+    await prepInsert(newBoss.globalPlacement);
     await newBoss.save();
     return res.status(201).json({ name: newBoss.name });
   } catch (err) {
@@ -39,8 +47,10 @@ const addBoss = async (req, res) => {
 
 const getMain = async (req, res) => {
   try {
-    // TODO
-
+    const query = { isLegacy: false };
+    const docs = await Boss.find(query)
+      .select('name mod difficulty maxHP globalPlacement video')
+      .lean().exec();
     return res.json({ list: docs });
   } catch (err) {
     console.log(err);
@@ -50,8 +60,7 @@ const getMain = async (req, res) => {
 
 const getLegacy = async (req, res) => {
   try {
-    // TODO
-
+    const docs = await Boss.find({});
     return res.json({ list: docs });
   } catch (err) {
     console.log(err);
