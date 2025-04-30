@@ -17,7 +17,7 @@ const requiresAdmin = (req, res, next) => {
 // Checks if user is logged out
 const requiresLogout = (req, res, next) => {
   if (req.session.account) {
-    return res.redirect('/mainList');
+    return res.redirect('/main');
   }
 
   return next();
